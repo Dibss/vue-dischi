@@ -13,6 +13,7 @@ name: 'HeaderComp',
 <style scoped lang='scss'>
 .container{
   background-color: #2e3a46;
+  height: 8vh;
   img{
     width: 3%;
     height: auto;
