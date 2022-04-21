@@ -1,14 +1,11 @@
 <template>
   <div class="searchContainer">
     <form action="">
-      <select name="genre" id="selectGenre" v-model="selectGenre">
+      <select name="genre-artist" id="select" v-model="select">
         <option :value="genre" v-for="genre in genArr" :key="genre.id">{{genre}}</option>
-      </select>
-      <button @click.prevent="$emit('searchGenre', selectGenre)">Cerca</button>
-      <select name="artist" id="selectArtist" v-model="selectArtist">
         <option :value="artist" v-for="artist in artArr" :key="artist.id">{{artist}}</option>
       </select>
-      <button @click.prevent="$emit('searchArtist', selectArtist)">Cerca</button>
+      <button @click.prevent="$emit('search', select)" @click="inputSearch()">Cerca</button>
     </form>
   </div>
 </template>
@@ -22,13 +19,13 @@ props : {
 },
 data(){
   return{
-    selectGenre : "",
-    selectArtist : ""
+    select: "",
   }
 },
 methods : {
   inputSearch : function(){
-    
+    let a = document.getElementById("select").value;
+    console.log(a);
   }
 },
 mounted(){

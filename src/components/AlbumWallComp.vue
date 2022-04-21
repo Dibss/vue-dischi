@@ -36,8 +36,7 @@ data(){
     albumArr : [],
     genreArr : [],
     artistsArr : [],
-    selectGenre : "",
-    selectArtist : ""
+    select : ""
   }
 },
 created(){
@@ -98,7 +97,7 @@ computed : {
       return this.albumArr
     }
     return this.albumArr.filter( (item) => {
-      return item.author.includes(this.selectArtist) + item.genre.includes(this.selectGenre)
+      return item.author.includes(this.select) || item.genre.includes(this.select)
     })
   },
 }
