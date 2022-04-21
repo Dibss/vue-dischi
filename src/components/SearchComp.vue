@@ -33,7 +33,7 @@ methods : {
 
 <style scoped lang='scss'>
 .searchContainer{
-  width: 98%;
+  width: 98.5%;
   text-align: right;
   margin-top: 1em;
   select{

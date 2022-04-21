@@ -93,11 +93,14 @@ methods : {
 },
 computed : {
   filteredAlbums(){
-    if(this.select == ""){
-      return this.albumArr
-    }
     return this.albumArr.filter( (item) => {
-      return item.author.includes(this.select) || item.genre.includes(this.select)
+      if(item.author.includes(this.select)){
+        return item.author.includes(this.select)
+      } else if (item.genre.includes(this.select)){
+        return item.genre.includes(this.select)
+      } else {
+        return this.albumArr
+      }
     })
   },
 }
