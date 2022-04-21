@@ -25,6 +25,14 @@ data(){
     selectGenre : "",
     selectArtist : ""
   }
+},
+methods : {
+  inputSearch : function(){
+    
+  }
+},
+mounted(){
+  console.log(this.selectGenre)
 }
 }
 </script>

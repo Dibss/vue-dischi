@@ -36,7 +36,8 @@ data(){
     albumArr : [],
     genreArr : [],
     artistsArr : [],
-    select : ""
+    selectGenre : "",
+    selectArtist : ""
   }
 },
 created(){
