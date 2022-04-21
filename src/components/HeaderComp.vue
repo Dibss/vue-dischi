@@ -6,7 +6,7 @@
 
 <script>
 export default {
-name: 'HeaderComp',
+  name: "HeaderComp",
 }
 </script>
 
@@ -14,6 +14,9 @@ name: 'HeaderComp',
 .container{
   background-color: #2e3a46;
   height: 8vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   img{
     width: 3%;
     height: auto;
