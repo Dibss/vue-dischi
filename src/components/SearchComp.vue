@@ -28,9 +28,6 @@ methods : {
     console.log(a);
   }
 },
-mounted(){
-  console.log(this.selectGenre)
-}
 }
 </script>
 
