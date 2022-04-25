@@ -1,6 +1,6 @@
 <template>
   <div id="main-container">
-    <SearchComp @search="filteredAlbums" :genArr="genreArr" :artArr="artistsArr"/>
+    <SearchComp @search="filteredGenre" @searchArtist="filteredArtist" :genArr="genreArr" :artArr="artistsArr"/>
     <div class="container"> 
       <LoaderComp :class="(albumArr.length == 10)? 'd-none' : ''"/>
       <div v-if="albumArr.length == 10" class="container__cards">
@@ -11,7 +11,7 @@
           :year="album.year"
         />
       </div>
-      <ItemsFoundComp :numItems="albumArr.length"/>
+      <ItemsFoundComp :numItems="filtered().length"/>
     </div>
   </div>
 </template>
@@ -37,6 +37,7 @@ data(){
     genreArr : [],
     artistsArr : [],
     select : "",
+    selectArt : ""
   }
 },
 created(){
@@ -88,33 +89,27 @@ methods : {
       })
   },
 
-  filteredAlbums(selected){
+  filteredGenre(selected){
     this.select = selected;
     console.log(this.select);
-    // return this.albumArr.filter( (item) => {
-    //   if(item.author.includes(this.select)){
-    //     return item.author.includes(this.select)
-    //   } else if (item.genre.includes(this.select)){
-    //     return item.genre.includes(this.select)
-    //   } else {
-    //     return this.albumArr
-    //   }
-    // })
   },
+
+  filteredArtist(selected){
+    this.selectArt = selected;
+    console.log(this.selectArt);
+
+  },
+
   filtered(){
-    this.albumArr.forEach(element => {
-      if(!element.genre.includes(this.select)){
-        this.albumArr.splice(element, 1);
-      } else if (!element.author.includes(this.select)){
-        this.albumArr.splice(element, 1);
-      } else {
-        this.albumArr
-      }
-    });
-    console.log(this.albumArr);
-    return this.albumArr
-  }
-},
+    if(this.select == "" && this.selectArt == ""){
+      return this.albumArr
+    } else {
+      return this.albumArr.filter( (elem) => {
+        return elem.author.includes(this.selectArt) && elem.genre.includes(this.select)
+      })
+    }
+  },
+}
 }
 </script>
 
