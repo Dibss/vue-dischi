@@ -117,6 +117,7 @@ methods : {
 .d-none{display: none;}
 #main-container{
   overflow-y: auto;
+  width: 100vw;
   .container{
     width: 70%;
     margin: 0 auto;
