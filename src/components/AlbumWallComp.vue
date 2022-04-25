@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div id="main-container">
     <SearchComp @search="filteredAlbums" :genArr="genreArr" :artArr="artistsArr"/>
     <div class="container"> 
       <LoaderComp :class="(albumArr.length == 10)? 'd-none' : ''"/>
       <div v-if="albumArr.length == 10" class="container__cards">
-        <AlbumComp v-for="album in filteredAlbums" :key="album.id"
+        <AlbumComp v-for="album in filtered()" :key="album.id"
           :image="album.poster"
           :artist="album.author"
           :title="album.title"
@@ -36,18 +36,15 @@ data(){
     albumArr : [],
     genreArr : [],
     artistsArr : [],
-    select : ""
+    select : "",
   }
 },
 created(){
   this.getAlbums();
   this.getGenres();
-  this.getArtists()
+  this.getArtists();
 },
 methods : {
-  search(text){
-    this.select = text
-  },
   getAlbums(){
     axios.get("https://flynn.boolean.careers/exercises/api/array/music")
       .then((res) => {
@@ -56,7 +53,7 @@ methods : {
       })
       .catch((error) => {
         console.log(error)
-      })
+      });
   },
   getGenres(){
     axios.get("https://flynn.boolean.careers/exercises/api/array/music")
@@ -90,33 +87,49 @@ methods : {
         console.log(error)
       })
   },
-},
-computed : {
-  filteredAlbums(){
-    return this.albumArr.filter( (item) => {
-      if(item.author.includes(this.select)){
-        return item.author.includes(this.select)
-      } else if (item.genre.includes(this.select)){
-        return item.genre.includes(this.select)
-      } else {
-        return this.albumArr
-      }
-    })
+
+  filteredAlbums(selected){
+    this.select = selected;
+    console.log(this.select);
+    // return this.albumArr.filter( (item) => {
+    //   if(item.author.includes(this.select)){
+    //     return item.author.includes(this.select)
+    //   } else if (item.genre.includes(this.select)){
+    //     return item.genre.includes(this.select)
+    //   } else {
+    //     return this.albumArr
+    //   }
+    // })
   },
-}
+  filtered(){
+    this.albumArr.forEach(element => {
+      if(!element.genre.includes(this.select)){
+        this.albumArr.splice(element, 1);
+      } else if (!element.author.includes(this.select)){
+        this.albumArr.splice(element, 1);
+      } else {
+        this.albumArr
+      }
+    });
+    console.log(this.albumArr);
+    return this.albumArr
+  }
+},
 }
 </script>
 
 <style scoped lang='scss'>
 .d-none{display: none;}
-.container{
-  width: 70%;
-  margin: 0 auto;
-  height: 85vh;
+#main-container{
   overflow-y: auto;
-  &__cards{
-    display: flex;
-    flex-wrap: wrap;
+  .container{
+    width: 70%;
+    margin: 0 auto;
+    height: 80vh;
+    &__cards{
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 }
 </style>

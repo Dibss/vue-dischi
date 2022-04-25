@@ -5,7 +5,7 @@
         <option :value="genre" v-for="genre in genArr" :key="genre.id">{{genre}}</option>
         <option :value="artist" v-for="artist in artArr" :key="artist.id">{{artist}}</option>
       </select>
-      <button @click.prevent="$emit('search', select)" @click="inputSearch()">Cerca</button>
+      <button @click.prevent="$emit('search', select)">Cerca</button>
     </form>
   </div>
 </template>
@@ -20,12 +20,6 @@ props : {
 data(){
   return{
     select: "",
-  }
-},
-methods : {
-  inputSearch : function(){
-    let a = document.getElementById("select").value;
-    console.log(a);
   }
 },
 }

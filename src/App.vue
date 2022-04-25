@@ -25,7 +25,7 @@ export default {
 <style lang="scss">
 *{padding: 0; margin: 0; box-sizing: border-box;}
 #app{
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-color: #1e2d3b;
   font-family: sans-serif;
